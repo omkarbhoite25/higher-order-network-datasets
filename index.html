@@ -42,6 +42,8 @@ header.hd{display:flex;justify-content:space-between;align-items:flex-start;gap:
 .brand svg{width:26px;height:26px;stroke:var(--a1);fill:none;stroke-width:1.4;flex:0 0 auto}
 h1{font-size:clamp(26px,3.2vw,38px);font-weight:600;letter-spacing:-.015em;color:#fff;margin:0;line-height:1.08;max-width:24ch}
 nav.tabs{display:flex;gap:8px;flex-wrap:wrap;padding-top:3px}
+.hdright{display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+.updated{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut2);white-space:nowrap}
 .tab{display:flex;align-items:center;gap:8px;cursor:pointer;font-family:var(--mono);font-size:12.5px;letter-spacing:.2em;text-transform:uppercase;font-weight:500;padding:9px 15px;border-radius:2px;transition:all .15s;background:transparent;color:var(--mut);border:1px solid var(--line)}
 .tab .dot{width:6px;height:6px;border-radius:50%;background:var(--mut2)}
 .tab:hover{color:#d4d4d8;border-color:var(--a1)}
@@ -168,12 +170,15 @@ footer a{color:var(--a1)}
           <svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.2"/><circle cx="18" cy="6" r="2.2"/><circle cx="12" cy="18" r="2.2"/><path d="M7.7 7.4 10.6 16M16.3 7.4 13.4 16M8 6h8"/></svg>
           <h1>Higher-Order &amp; Real-World Network Datasets</h1>
         </div>
-        <nav class="tabs" role="tablist" id="tabs">
+        <div class="hdright">
+          <div class="updated">Updated 2026-08-12 · 16:15 CEST</div>
+          <nav class="tabs" role="tablist" id="tabs">
           <button class="tab" role="tab" data-tab="catalog" aria-selected="true"><span class="dot"></span>Catalog</button>
           <button class="tab" role="tab" data-tab="tooling" aria-selected="false"><span class="dot"></span>Tooling</button>
           <button class="tab" role="tab" data-tab="notes" aria-selected="false"><span class="dot"></span>Notes</button>
           <button class="tab" role="tab" data-tab="refs" aria-selected="false"><span class="dot"></span>References</button>
         </nav>
+        </div>
       </header>
 
       <!-- ================= CATALOG ================= -->
@@ -438,24 +443,24 @@ const D=[
 
 // ===== Cross-field deep search: multivariate, temporal signals on >=2-cells / >=3-hyperedges (real-world). Added 2026-08-12. =====
 // -- Geophysical / remote-sensing (gridded 2-cells / voxel 3-cells) --
-{n:"GridRad-Severe (dual-pol NEXRAD)",c:"real",st:"C",og:"R",ho:1,co:3,mv:1,strict:1,d:"Weather radar · 7+ dual-pol moments per 3D voxel",s:"~2 km×0.5 km grid · 5-min · 2010–2022",nn:null,t:"yes",l:"open (NCAR RDA)",u:"https://rda.ucar.edu/datasets/d841006/"},
+{n:"GridRad-Severe (dual-pol NEXRAD)",c:"real",st:"C",og:"R",ho:1,co:3,mv:1,strict:1,d:"Weather radar · 7+ dual-pol moments per 3D voxel",s:"~2 km×0.5 km grid · 5-min · 2010–2022",nn:null,t:"yes",l:"open (GridRad)",u:"https://gridrad.org/data.html"},
 {n:"NEXRAD Level II (dual-pol)",c:"real",st:"C",og:"R",ho:1,co:3,mv:1,strict:1,d:"Weather radar · 6 moments per range-gate voxel",s:"125 WSR-88D · ~5-min volumes · dual-pol since 2011",nn:null,t:"yes",l:"public domain",u:"https://registry.opendata.aws/noaa-nexrad/"},
 {n:"EGMS (Copernicus / Sentinel-1 InSAR)",c:"real",st:"C",og:"R",ho:1,co:2,mv:1,strict:1,d:"Ground motion · vertical + E-W displacement per 100 m tile",s:"100 m grid · 6-day · 2015–present",nn:null,t:"yes",l:"EUPL",u:"https://egms.land.copernicus.eu/"},
 {n:"GOES-R ABI L1b radiances",c:"real",st:"C",og:"R",ho:1,co:2,mv:1,strict:1,d:"Geostationary imager · 16 spectral bands per cell",s:"ABI fixed grid · ≤15-min · 2017–present",nn:null,t:"yes",l:"open (NOAA)",u:"https://registry.opendata.aws/noaa-goes/"},
-{n:"NASA Ocean Color L3",c:"real",st:"C",og:"R",ho:1,co:2,mv:1,strict:1,d:"Ocean color · multi-band Rrs + Chl per tile",s:"4/9 km · daily–monthly · 1997–present",nn:null,t:"yes",l:"open (NASA)",u:"https://oceancolor.gsfc.nasa.gov/l3/"},
+{n:"NASA Ocean Color L3",c:"real",st:"C",og:"R",ho:1,co:2,mv:1,strict:1,d:"Ocean color · multi-band Rrs + Chl per tile",s:"4/9 km · daily–monthly · 1997–present",nn:null,t:"yes",l:"open (NASA)",u:"https://oceandata.sci.gsfc.nasa.gov/"},
 {n:"SMAP L3 Radiometer",c:"real",st:"C",og:"R",ho:1,co:2,mv:1,strict:1,d:"L-band radiometer · H/V brightness temp + soil moisture",s:"9 km EASE-Grid · daily · 2015–present",nn:null,t:"yes",l:"open (NASA)",u:"https://nsidc.org/data/spl3smp_e/versions/6"},
-{n:"TEMPO L3 air quality",c:"real",st:"C",og:"R",ho:1,co:2,mv:1,strict:1,d:"Geostationary · NO₂/HCHO/O₃ co-retrieved per cell",s:"~2×4.5 km · hourly · 2023–present",nn:null,t:"yes",l:"open (NASA)",u:"https://asdc.larc.nasa.gov"},
+{n:"TEMPO L3 air quality",c:"real",st:"C",og:"R",ho:1,co:2,mv:1,strict:1,d:"Geostationary · NO₂/HCHO/O₃ co-retrieved per cell",s:"~2×4.5 km · hourly · 2023–present",nn:null,t:"yes",l:"open (NASA)",u:"https://www.earthdata.nasa.gov/data/catalog/larc-cloud-tempo-no2-l3-v03"},
 {n:"Sleipner 4D time-lapse seismic",c:"real",st:"C",og:"R",ho:1,co:3,mv:1,d:"CO₂ monitoring · amplitude + inverted attributes per voxel (attributes derived)",s:"11 surveys · 1994–2010",nn:null,t:"partial",l:"open (CO2 DataShare)",u:"https://co2datashare.org/dataset/sleipner-4d-seismic-dataset"},
 {n:"Volve 4D seismic (Equinor)",c:"real",st:"C",og:"R",ho:1,co:3,mv:1,d:"Field monitoring · seismic voxels (multivariate via inversion)",s:"3D + 4D · 2008–2016",nn:null,t:"partial",l:"Equinor Open Data",u:"https://www.equinor.com/energy/volve-data-sharing"},
 {n:"Roemmich-Gilson Argo (gridded T & S)",c:"real",st:"C",og:"R",ho:1,co:3,mv:1,d:"Ocean interior · temperature + salinity per lat/lon/depth cell (interpolated)",s:"1/6° · monthly · 2004–present",nn:null,t:"yes",l:"open",u:"https://sio-argo.ucsd.edu/RG_Climatology.html"},
-{n:"ERA5 on HEALPix (HERA5 / DLWP-HPX)",c:"real",st:"C",og:"R",ho:1,co:2,mv:1,d:"Atmosphere · many variables per spherical cell (reanalysis · model-blended)",s:"HEALPix · hourly · 1940–present",nn:null,t:"yes",l:"Copernicus",u:"https://github.com/CognitiveModeling/dlwp-hpx"},
+{n:"ERA5 on HEALPix (HERA5)",c:"real",st:"C",og:"R",ho:1,co:2,mv:1,d:"Atmosphere · 73 variables per spherical cell (reanalysis · model-blended)",s:"HEALPix z7 · hourly · 2010–2023",nn:null,t:"yes",l:"Copernicus",u:"https://orcestra-campaign.org/hera5.html"},
 // -- Areal / choropleth (regions as 2-cell faces of a planar subdivision) --
 {n:"InfoDengue (Brazil municipal)",c:"real",st:"C",og:"R",ho:1,co:2,mv:1,strict:1,d:"Epidemiology · cases + temp + humidity + Rt per municipality",s:"≤5,570 municipalities · weekly · 2010–present",nn:5570,t:"yes",l:"open",u:"https://info.dengue.mat.br/services/api"},
 {n:"NYC Taxi Zones + TLC trips",c:"real",st:"C",og:"R",ho:1,co:2,mv:1,strict:1,d:"Mobility · per-zone pickups/fare/distance/duration (aggregate trips→zone)",s:"263 zones · monthly · 2009–present",nn:263,t:"yes",l:"NYC Open Data",u:"https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page"},
-{n:"JHU CSSE COVID-19 (US county)",c:"real",st:"C",og:"R",ho:1,co:2,mv:1,strict:1,d:"Epidemiology · cases + deaths (+population) per county",s:"~3,143 counties · daily · 2020–2023",nn:3143,t:"yes",l:"CC BY 4.0",u:"https://github.com/CSSEGISandData/COVID-19"},
+{n:"JHU CSSE COVID-19 (US county)",c:"real",st:"C",og:"R",ho:1,co:2,mv:1,strict:1,d:"Epidemiology · cases + deaths (+population) per county",s:"~3,143 counties · daily · 2020–2023",nn:3143,t:"yes",l:"CC BY 4.0",u:"https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data/csse_covid_19_time_series"},
 {n:"EuroCropsML (agri parcels)",c:"real",st:"C",og:"R",ho:1,co:2,mv:1,strict:1,d:"Agriculture · 13-band Sentinel-2 median per parcel polygon",s:"millions of parcels · intra-annual 2021",nn:null,t:"yes",l:"CC BY-SA 4.0",u:"https://zenodo.org/records/15095445"},
-{n:"US Census ACS (county/tract)",c:"real",st:"C",og:"R",ho:1,co:2,mv:1,strict:1,d:"Socioeconomics · income/poverty/education/… per region",s:"~3,143 counties / 85k tracts · annual",nn:3143,t:"yes",l:"public domain",u:"https://data.census.gov"},
-{n:"CAMELS (hydrologic catchments)",c:"real",st:"C",og:"R",ho:1,co:2,mv:1,strict:1,d:"Hydrology · met forcings + observed streamflow per basin",s:"671 basins · daily · 1980–2014",nn:671,t:"yes",l:"open",u:"https://gdex.ucar.edu/dataset/camels.html"},
+{n:"US Census ACS (county/tract)",c:"real",st:"C",og:"R",ho:1,co:2,mv:1,strict:1,d:"Socioeconomics · income/poverty/education/… per region",s:"~3,143 counties / 85k tracts · annual",nn:3143,t:"yes",l:"public domain",u:"https://www.census.gov/programs-surveys/acs/data.html"},
+{n:"CAMELS (hydrologic catchments)",c:"real",st:"C",og:"R",ho:1,co:2,mv:1,strict:1,d:"Hydrology · met forcings + observed streamflow per basin",s:"671 basins · daily · 1980–2014",nn:671,t:"yes",l:"open",u:"https://ral.ucar.edu/solutions/products/camels"},
 {n:"MIT Election Lab (county returns)",c:"real",st:"C",og:"R",ho:1,co:2,mv:1,strict:1,d:"Elections · votes by party per county",s:"~3,150 counties · 6 cycles 2000–2020",nn:3150,t:"yes",l:"open (Dataverse)",u:"https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/VOQCHQ"},
 {n:"Chicago crimes (community areas)",c:"real",st:"C",og:"R",ho:1,co:2,mv:1,strict:1,d:"Urban crime · counts by type per area (aggregate incidents→area)",s:"77 areas · monthly · 2001–present",nn:77,t:"yes",l:"open",u:"https://data.cityofchicago.org/Public-Safety/Crimes-2001-to-Present/ijzp-q8t2"},
 {n:"Eurostat regional (NUTS)",c:"real",st:"C",og:"R",ho:1,co:2,mv:1,strict:1,d:"EU statistics · GDP/employment/… per NUTS region",s:"~280 NUTS-2 / 1,340 NUTS-3 · annual",nn:1340,t:"yes",l:"open",u:"https://ec.europa.eu/eurostat/web/regions/database"},
@@ -469,13 +474,12 @@ const D=[
 {n:"Shot-peened Ni HR-DIC (450 °C)",c:"real",st:"C",og:"R",ho:1,co:2,mv:1,strict:1,d:"HR-DIC · per-facet displacement + shear strain (+EBSD)",s:"7 states · SEM-DIC",nn:null,t:"yes",l:"CC BY 4.0",u:"https://zenodo.org/records/4728016"},
 {n:"NIST AMMT (LPBF in-situ)",c:"real",st:"C",og:"R",ho:1,co:2,mv:1,strict:1,d:"Additive mfg · power + melt-pool + optical per layer region (+XCT)",s:"layer-wise · registered",nn:null,t:"yes",l:"public (NIST)",u:"https://data.nist.gov/od/id/mds2-2233"},
 // -- Hypergraph groups (signal on size>=3 hyperedges; incidence assembled by user) --
-{n:"DeFi multi-asset AMM pools",c:"real",st:"H",og:"R",ho:1,co:3,mv:1,strict:1,d:"DeFi · per-pool reserves/volume/fees/TVL (pool = ≥3-token hyperedge)",s:"Curve/Balancer pools (3–8 tokens) · daily/block",nn:null,t:"yes",l:"CC0 / on-chain",u:"https://doi.org/10.7910/DVN/OSOR3P"},
 {n:"MTA Bus Hourly Ridership",c:"real",st:"H",og:"R",ho:1,co:3,mv:1,strict:1,d:"Transit · per-route fare-class ridership + transfers (route = stop hyperedge)",s:"~402 routes · hourly · 2020–present",nn:402,t:"yes",l:"NY Open Data",u:"https://data.ny.gov/Transportation/MTA-Bus-Hourly-Ridership-Beginning-September-2020/kv7t-n8in/about_data"},
-{n:"NBA 5-man lineups",c:"real",st:"H",og:"R",ho:1,co:3,mv:1,strict:1,d:"Sports · per-lineup box + advanced stats (lineup = 5-player hyperedge)",s:"1000s lineups/season · per-game · 2007–",nn:null,t:"yes",l:"open (pbpstats)",u:"https://github.com/dblackrun/pbpstats"},
+{n:"NBA 5-man lineups",c:"real",st:"H",og:"R",ho:1,co:3,mv:1,strict:1,d:"Sports · per-lineup box + advanced stats (lineup = 5-player hyperedge)",s:"1000s lineups/season · per-game · 2007–",nn:null,t:"yes",l:"NBA Stats",u:"https://www.nba.com/stats/lineups"},
 {n:"StatsBomb open (soccer squads)",c:"real",st:"H",og:"R",ho:1,co:3,mv:1,strict:1,d:"Sports · per-squad match aggregates (XI = player hyperedge)",s:"3,000+ matches · per-match",nn:null,t:"yes",l:"open (StatsBomb)",u:"https://github.com/statsbomb/open-data"},
 // -- Biology (provided on >=3-metabolite reactions / protein complexes; caveated) --
 {n:"Metabolic reaction flux (CeCaFDB/Keio)",c:"real",st:"H",og:"R",ho:1,co:3,d:"Metabolism · measured ¹³C flux per reaction (scalar; multivariate across conditions)",s:"iML1515: 2,719 rxns · multi-condition",nn:null,t:"partial",l:"open",u:"http://www.cecafdb.org/"},
-{n:"Protein-complex SEC-SWATH-MS",c:"real",st:"H",og:"R",ho:1,co:3,mv:1,d:"Proteomics · per-complex co-elution profile (few cell-cycle states)",s:"462 complexes · 65 fractions × states",nn:null,t:"partial",l:"open (ProteomeXchange)",u:"https://pmc.ncbi.nlm.nih.gov/articles/PMC7042714/"},
+{n:"Protein-complex SEC-SWATH-MS",c:"real",st:"H",og:"R",ho:1,co:3,mv:1,d:"Proteomics · per-complex co-elution profile (few cell-cycle states)",s:"462 complexes · 65 fractions × states",nn:null,t:"partial",l:"open (ProteomeXchange)",u:"https://www.ebi.ac.uk/pride/archive/projects/PXD010288"},
 // -- Neuroscience & 4D mesh (2-cell signals) --
 {n:"fMRI triangle co-fluctuations (Brain_HORS)",c:"real",st:"S",og:"R",ho:1,co:2,d:"Neuro · triangle co-fluctuation time series (derived from HCP BOLD; scalar)",s:"HCP 100 subj · 119 regions",nn:null,t:"yes",l:"open (HCP/Zenodo)",u:"https://zenodo.org/records/13786223"},
 {n:"Dynamic FAUST / Dyna (4D scans)",c:"real",st:"C",og:"R",ho:1,co:2,mv:1,strict:1,d:"4D body scans · per-face deformation over time",s:"10 subj · 13,776 faces · 60 fps",nn:null,t:"yes",l:"research",u:"https://dfaust.is.tue.mpg.de/"},
@@ -485,8 +489,7 @@ const D=[
 {n:"In-vitro 4D-Flow MRI (aneurysm phantoms)",c:"real",st:"C",og:"R",ho:1,co:3,mv:1,strict:1,d:"Fluids · per-voxel u,v,w in 3D-printed phantoms",s:"0.75 mm³ · 20 cardiac phases · 23 GB",nn:null,t:"yes",l:"CC BY 4.0",u:"https://zenodo.org/records/17183575"},
 {n:"AIVT Rayleigh–Bénard convection",c:"real",st:"C",og:"R",ho:1,co:3,mv:1,strict:1,d:"Convection · per-cell temperature + u,v,w (measured)",s:"reconstructed volume · time-resolved",nn:null,t:"yes",l:"CC BY 4.0 (Dryad)",u:"https://doi.org/10.5061/dryad.jm63xsjnj"},
 {n:"SPLEEN LP turbine cascade (VKI)",c:"real",st:"C",og:"R",ho:1,co:2,mv:1,strict:1,d:"Turbomachinery · unsteady surface pressure + wall-shear per blade/endwall cell",s:"796 MB · +CAD",nn:null,t:"yes",l:"CC BY 4.0",u:"https://zenodo.org/records/13712768"},
-{n:"Enodise distributed propulsion",c:"real",st:"C",og:"R",ho:1,co:2,mv:1,strict:1,d:"Aerodynamics · time-resolved velocity plane + wing surface pressures",s:"47 GB · +CAD",nn:null,t:"yes",l:"CC BY 4.0",u:"https://zenodo.org/records/8283630"},
-{n:"NASA uPSP launch-vehicle buffet",c:"real",st:"C",og:"R",ho:1,co:2,d:"Aerodynamics · unsteady surface pressure ΔCp per model-grid node (single scalar)",s:"~1M nodes · ~5 kHz · request-only raw",nn:null,t:"yes",l:"US Gov (code public)",u:"https://github.com/nasa/upsp-processing"}
+{n:"Enodise distributed propulsion",c:"real",st:"C",og:"R",ho:1,co:2,mv:1,strict:1,d:"Aerodynamics · time-resolved velocity plane + wing surface pressures",s:"47 GB · +CAD",nn:null,t:"yes",l:"CC BY 4.0",u:"https://zenodo.org/records/8283630"}
 ];
 
 const TOOLS=[

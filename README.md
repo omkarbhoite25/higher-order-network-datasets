@@ -9,7 +9,7 @@ under edge and simplex augmentation.
 
 ## What it is
 
-A single self-contained page ([`index.html`](index.html)) cataloging 131 datasets and
+A single self-contained page ([`index.html`](index.html)) cataloging 129 datasets and
 9 libraries. Every count, identifier, license, and source link was checked against its
 primary source. The page runs offline in any browser, with fonts and math embedded and
 no network needed.
@@ -28,7 +28,7 @@ Hypergraphx, SocioPatterns, the SCoNe ocean-drifter complex, the Ebli and TopoNe
 simplicial complexes, and GUDHI daily-activities). Pairwise real-world graphs are marked
 with their lifting route, either a clique complex or a Vietoris-Rips filtration.
 
-A second one-click preset, **MV·temporal on ≥2-cells**, isolates the 35 datasets that
+A second one-click preset, **MV·temporal on ≥2-cells**, isolates the 34 datasets that
 carry a real, multivariate, time-varying signal on cells of order 2 or higher (triangles
 or faces, voxels, grains) or on hyperedges of size 3 or more. These come from a
 cross-field search beyond the usual topological-ML sources. They include weather radar,
