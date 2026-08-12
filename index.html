@@ -96,12 +96,13 @@ tbody td{padding:12px 16px;vertical-align:top}
 td.nm{padding-left:15px;font-size:15px;font-weight:500;white-space:nowrap;color:#ededf0;border-left:2px solid var(--P)}
 td.nm .star{color:#fff;margin-left:7px;font-size:12.5px}
 td.nm .hob{margin-left:8px;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;color:var(--R);border:1px solid rgba(74,222,128,.45);border-radius:2px;padding:1px 4px;vertical-align:middle}
+td.nm .cob{margin-left:8px;font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;color:#5fe0d3;border:1px solid rgba(95,224,211,.4);border-radius:2px;padding:1px 4px;vertical-align:middle}
 .catcell{display:flex;flex-direction:column;gap:3px;white-space:nowrap}
 .stag{display:inline-flex;align-items:center;gap:7px;font-size:13.5px;color:var(--a1)}
 .stag .sw{width:8px;height:8px;flex:0 0 auto}
 .otag{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase}
-td.dom{color:#8a8a92;max-width:290px;font-size:14px}
-td.sz{font-family:var(--mono);font-size:12.5px;color:#8a8a92;white-space:nowrap}
+td.dom{color:#8a8a92;max-width:250px;font-size:14px}
+td.sz{font-family:var(--mono);font-size:12.5px;color:#8a8a92;white-space:normal;max-width:210px}
 .tpill{display:inline-block;font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:2px}
 .tpill.yes{color:#5fe0d3;background:rgba(95,224,211,.1);border:1px solid rgba(95,224,211,.28)}
 .tpill.no{color:var(--mut);background:transparent;border:1px solid var(--line)}
@@ -185,6 +186,7 @@ footer a{color:var(--a1)}
             </div>
             <button class="chip rwho" id="chipRwho" aria-pressed="false">★ Real-world higher-order</button>
             <button class="chip" id="chipTemporal" aria-pressed="false">Temporal only</button>
+            <button class="chip rwho" id="chipCochain" aria-pressed="false">★ MV·temporal on ≥2-cells</button>
             <button class="chip" id="chipPick" aria-pressed="false">★ Top picks</button>
             <span class="count" id="count"></span>
           </div>
@@ -432,7 +434,59 @@ const D=[
 {n:"Western US power grid",c:"real",st:"P",og:"R",d:"Transmission grid topology",s:"4,941 nodes · 6,594 lines",nn:4941,t:"no",l:"open",u:"https://networkrepository.com/power.php"},
 {n:"AMiner citation",c:"real",st:"P",og:"R",d:"Citation network",s:"4.1M papers · 36.6M citations",nn:4107340,t:"yes",l:"research",u:"https://www.aminer.org/citation",lf:"coauthorship hypergraph"},
 {n:"TopoBench",c:"bench",st:"M",og:"B",d:"Topological DL benchmark + liftings",s:"graph/PC → simplicial/cell/hyper",nn:null,t:"no",l:"MIT",u:"https://github.com/geometric-intelligence/TopoBench",p:1},
-{n:"Open Graph Benchmark",c:"bench",st:"P",og:"B",d:"Node / link / graph tasks",s:"ogbn / ogbl / ogbg families",nn:null,t:"no",l:"MIT",u:"https://ogb.stanford.edu/"}
+{n:"Open Graph Benchmark",c:"bench",st:"P",og:"B",d:"Node / link / graph tasks",s:"ogbn / ogbl / ogbg families",nn:null,t:"no",l:"MIT",u:"https://ogb.stanford.edu/"},
+
+// ===== Cross-field deep search: multivariate, temporal signals on >=2-cells / >=3-hyperedges (real-world). Added 2026-08-12. =====
+// -- Geophysical / remote-sensing (gridded 2-cells / voxel 3-cells) --
+{n:"GridRad-Severe (dual-pol NEXRAD)",c:"real",st:"C",og:"R",ho:1,co:3,mv:1,strict:1,d:"Weather radar · 7+ dual-pol moments per 3D voxel",s:"~2 km×0.5 km grid · 5-min · 2010–2022",nn:null,t:"yes",l:"open (NCAR RDA)",u:"https://rda.ucar.edu/datasets/d841006/"},
+{n:"NEXRAD Level II (dual-pol)",c:"real",st:"C",og:"R",ho:1,co:3,mv:1,strict:1,d:"Weather radar · 6 moments per range-gate voxel",s:"125 WSR-88D · ~5-min volumes · dual-pol since 2011",nn:null,t:"yes",l:"public domain",u:"https://registry.opendata.aws/noaa-nexrad/"},
+{n:"EGMS (Copernicus / Sentinel-1 InSAR)",c:"real",st:"C",og:"R",ho:1,co:2,mv:1,strict:1,d:"Ground motion · vertical + E-W displacement per 100 m tile",s:"100 m grid · 6-day · 2015–present",nn:null,t:"yes",l:"EUPL",u:"https://egms.land.copernicus.eu/"},
+{n:"GOES-R ABI L1b radiances",c:"real",st:"C",og:"R",ho:1,co:2,mv:1,strict:1,d:"Geostationary imager · 16 spectral bands per cell",s:"ABI fixed grid · ≤15-min · 2017–present",nn:null,t:"yes",l:"open (NOAA)",u:"https://registry.opendata.aws/noaa-goes/"},
+{n:"NASA Ocean Color L3",c:"real",st:"C",og:"R",ho:1,co:2,mv:1,strict:1,d:"Ocean color · multi-band Rrs + Chl per tile",s:"4/9 km · daily–monthly · 1997–present",nn:null,t:"yes",l:"open (NASA)",u:"https://oceancolor.gsfc.nasa.gov/l3/"},
+{n:"SMAP L3 Radiometer",c:"real",st:"C",og:"R",ho:1,co:2,mv:1,strict:1,d:"L-band radiometer · H/V brightness temp + soil moisture",s:"9 km EASE-Grid · daily · 2015–present",nn:null,t:"yes",l:"open (NASA)",u:"https://nsidc.org/data/spl3smp_e/versions/6"},
+{n:"TEMPO L3 air quality",c:"real",st:"C",og:"R",ho:1,co:2,mv:1,strict:1,d:"Geostationary · NO₂/HCHO/O₃ co-retrieved per cell",s:"~2×4.5 km · hourly · 2023–present",nn:null,t:"yes",l:"open (NASA)",u:"https://asdc.larc.nasa.gov"},
+{n:"Sleipner 4D time-lapse seismic",c:"real",st:"C",og:"R",ho:1,co:3,mv:1,d:"CO₂ monitoring · amplitude + inverted attributes per voxel (attributes derived)",s:"11 surveys · 1994–2010",nn:null,t:"partial",l:"open (CO2 DataShare)",u:"https://co2datashare.org/dataset/sleipner-4d-seismic-dataset"},
+{n:"Volve 4D seismic (Equinor)",c:"real",st:"C",og:"R",ho:1,co:3,mv:1,d:"Field monitoring · seismic voxels (multivariate via inversion)",s:"3D + 4D · 2008–2016",nn:null,t:"partial",l:"Equinor Open Data",u:"https://www.equinor.com/energy/volve-data-sharing"},
+{n:"Roemmich-Gilson Argo (gridded T & S)",c:"real",st:"C",og:"R",ho:1,co:3,mv:1,d:"Ocean interior · temperature + salinity per lat/lon/depth cell (interpolated)",s:"1/6° · monthly · 2004–present",nn:null,t:"yes",l:"open",u:"https://sio-argo.ucsd.edu/RG_Climatology.html"},
+{n:"ERA5 on HEALPix (HERA5 / DLWP-HPX)",c:"real",st:"C",og:"R",ho:1,co:2,mv:1,d:"Atmosphere · many variables per spherical cell (reanalysis · model-blended)",s:"HEALPix · hourly · 1940–present",nn:null,t:"yes",l:"Copernicus",u:"https://github.com/CognitiveModeling/dlwp-hpx"},
+// -- Areal / choropleth (regions as 2-cell faces of a planar subdivision) --
+{n:"InfoDengue (Brazil municipal)",c:"real",st:"C",og:"R",ho:1,co:2,mv:1,strict:1,d:"Epidemiology · cases + temp + humidity + Rt per municipality",s:"≤5,570 municipalities · weekly · 2010–present",nn:5570,t:"yes",l:"open",u:"https://info.dengue.mat.br/services/api"},
+{n:"NYC Taxi Zones + TLC trips",c:"real",st:"C",og:"R",ho:1,co:2,mv:1,strict:1,d:"Mobility · per-zone pickups/fare/distance/duration (aggregate trips→zone)",s:"263 zones · monthly · 2009–present",nn:263,t:"yes",l:"NYC Open Data",u:"https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page"},
+{n:"JHU CSSE COVID-19 (US county)",c:"real",st:"C",og:"R",ho:1,co:2,mv:1,strict:1,d:"Epidemiology · cases + deaths (+population) per county",s:"~3,143 counties · daily · 2020–2023",nn:3143,t:"yes",l:"CC BY 4.0",u:"https://github.com/CSSEGISandData/COVID-19"},
+{n:"EuroCropsML (agri parcels)",c:"real",st:"C",og:"R",ho:1,co:2,mv:1,strict:1,d:"Agriculture · 13-band Sentinel-2 median per parcel polygon",s:"millions of parcels · intra-annual 2021",nn:null,t:"yes",l:"CC BY-SA 4.0",u:"https://zenodo.org/records/15095445"},
+{n:"US Census ACS (county/tract)",c:"real",st:"C",og:"R",ho:1,co:2,mv:1,strict:1,d:"Socioeconomics · income/poverty/education/… per region",s:"~3,143 counties / 85k tracts · annual",nn:3143,t:"yes",l:"public domain",u:"https://data.census.gov"},
+{n:"CAMELS (hydrologic catchments)",c:"real",st:"C",og:"R",ho:1,co:2,mv:1,strict:1,d:"Hydrology · met forcings + observed streamflow per basin",s:"671 basins · daily · 1980–2014",nn:671,t:"yes",l:"open",u:"https://gdex.ucar.edu/dataset/camels.html"},
+{n:"MIT Election Lab (county returns)",c:"real",st:"C",og:"R",ho:1,co:2,mv:1,strict:1,d:"Elections · votes by party per county",s:"~3,150 counties · 6 cycles 2000–2020",nn:3150,t:"yes",l:"open (Dataverse)",u:"https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/VOQCHQ"},
+{n:"Chicago crimes (community areas)",c:"real",st:"C",og:"R",ho:1,co:2,mv:1,strict:1,d:"Urban crime · counts by type per area (aggregate incidents→area)",s:"77 areas · monthly · 2001–present",nn:77,t:"yes",l:"open",u:"https://data.cityofchicago.org/Public-Safety/Crimes-2001-to-Present/ijzp-q8t2"},
+{n:"Eurostat regional (NUTS)",c:"real",st:"C",og:"R",ho:1,co:2,mv:1,strict:1,d:"EU statistics · GDP/employment/… per NUTS region",s:"~280 NUTS-2 / 1,340 NUTS-3 · annual",nn:1340,t:"yes",l:"open",u:"https://ec.europa.eu/eurostat/web/regions/database"},
+{n:"BLS LAUS (county labor)",c:"real",st:"C",og:"R",ho:1,co:2,mv:1,strict:1,d:"Labor · labor-force/employed/unemployed/rate per county",s:"~3,200 counties · monthly · 1990–present",nn:3200,t:"yes",l:"public domain",u:"https://www.bls.gov/lau/"},
+{n:"Zillow Research (neighborhoods)",c:"real",st:"C",og:"R",ho:1,co:2,mv:1,strict:1,d:"Housing · ZHVI/ZORI/inventory/sale price per region",s:"~17,000 neighborhoods · monthly",nn:17000,t:"yes",l:"research",u:"https://www.zillow.com/research/data/"},
+// -- Experimental mechanics / materials (DIC facets = 2-cells, grains/voxels = 3-cells) --
+{n:"Ti-7Al HEDM (in-situ tensile)",c:"real",st:"C",og:"R",ho:1,co:3,mv:1,strict:1,d:"Polycrystal · per-grain strain + stress tensor + orientation",s:"hundreds of grains · 4 load steps · APS",nn:null,t:"yes",l:"open (OSTI/Argonne)",u:"https://www.osti.gov/biblio/1329014"},
+{n:"Inconel 718 multimodal (3D + HR-DIC)",c:"real",st:"C",og:"R",ho:1,co:3,mv:1,strict:1,d:"Polycrystal · per-facet strain + slip; 3D grain map",s:"526 sections · 4 strain levels",nn:null,t:"yes",l:"CC BY 4.0",u:"https://doi.org/10.5061/dryad.83bk3j9sj"},
+{n:"AA2024-T3 stereo-DIC (fatigue)",c:"real",st:"C",og:"R",ho:1,co:2,mv:1,strict:1,d:"DIC · per-facet displacement (u,v,w) + strain tensor",s:"nodemaps · many fatigue steps · 3 configs",nn:null,t:"yes",l:"CC BY-NC 4.0",u:"https://zenodo.org/records/5740216"},
+{n:"CFRP synchrotron CT + DVC",c:"real",st:"C",og:"R",ho:1,co:3,mv:1,strict:1,d:"DVC · per-subvolume 3D displacement + strain tensor",s:"~24 GB · multiple load steps",nn:null,t:"yes",l:"CC BY 4.0",u:"https://zenodo.org/records/18959885"},
+{n:"Shot-peened Ni HR-DIC (450 °C)",c:"real",st:"C",og:"R",ho:1,co:2,mv:1,strict:1,d:"HR-DIC · per-facet displacement + shear strain (+EBSD)",s:"7 states · SEM-DIC",nn:null,t:"yes",l:"CC BY 4.0",u:"https://zenodo.org/records/4728016"},
+{n:"NIST AMMT (LPBF in-situ)",c:"real",st:"C",og:"R",ho:1,co:2,mv:1,strict:1,d:"Additive mfg · power + melt-pool + optical per layer region (+XCT)",s:"layer-wise · registered",nn:null,t:"yes",l:"public (NIST)",u:"https://data.nist.gov/od/id/mds2-2233"},
+// -- Hypergraph groups (signal on size>=3 hyperedges; incidence assembled by user) --
+{n:"DeFi multi-asset AMM pools",c:"real",st:"H",og:"R",ho:1,co:3,mv:1,strict:1,d:"DeFi · per-pool reserves/volume/fees/TVL (pool = ≥3-token hyperedge)",s:"Curve/Balancer pools (3–8 tokens) · daily/block",nn:null,t:"yes",l:"CC0 / on-chain",u:"https://doi.org/10.7910/DVN/OSOR3P"},
+{n:"MTA Bus Hourly Ridership",c:"real",st:"H",og:"R",ho:1,co:3,mv:1,strict:1,d:"Transit · per-route fare-class ridership + transfers (route = stop hyperedge)",s:"~402 routes · hourly · 2020–present",nn:402,t:"yes",l:"NY Open Data",u:"https://data.ny.gov/Transportation/MTA-Bus-Hourly-Ridership-Beginning-September-2020/kv7t-n8in/about_data"},
+{n:"NBA 5-man lineups",c:"real",st:"H",og:"R",ho:1,co:3,mv:1,strict:1,d:"Sports · per-lineup box + advanced stats (lineup = 5-player hyperedge)",s:"1000s lineups/season · per-game · 2007–",nn:null,t:"yes",l:"open (pbpstats)",u:"https://github.com/dblackrun/pbpstats"},
+{n:"StatsBomb open (soccer squads)",c:"real",st:"H",og:"R",ho:1,co:3,mv:1,strict:1,d:"Sports · per-squad match aggregates (XI = player hyperedge)",s:"3,000+ matches · per-match",nn:null,t:"yes",l:"open (StatsBomb)",u:"https://github.com/statsbomb/open-data"},
+// -- Biology (provided on >=3-metabolite reactions / protein complexes; caveated) --
+{n:"Metabolic reaction flux (CeCaFDB/Keio)",c:"real",st:"H",og:"R",ho:1,co:3,d:"Metabolism · measured ¹³C flux per reaction (scalar; multivariate across conditions)",s:"iML1515: 2,719 rxns · multi-condition",nn:null,t:"partial",l:"open",u:"http://www.cecafdb.org/"},
+{n:"Protein-complex SEC-SWATH-MS",c:"real",st:"H",og:"R",ho:1,co:3,mv:1,d:"Proteomics · per-complex co-elution profile (few cell-cycle states)",s:"462 complexes · 65 fractions × states",nn:null,t:"partial",l:"open (ProteomeXchange)",u:"https://pmc.ncbi.nlm.nih.gov/articles/PMC7042714/"},
+// -- Neuroscience & 4D mesh (2-cell signals) --
+{n:"fMRI triangle co-fluctuations (Brain_HORS)",c:"real",st:"S",og:"R",ho:1,co:2,d:"Neuro · triangle co-fluctuation time series (derived from HCP BOLD; scalar)",s:"HCP 100 subj · 119 regions",nn:null,t:"yes",l:"open (HCP/Zenodo)",u:"https://zenodo.org/records/13786223"},
+{n:"Dynamic FAUST / Dyna (4D scans)",c:"real",st:"C",og:"R",ho:1,co:2,mv:1,strict:1,d:"4D body scans · per-face deformation over time",s:"10 subj · 13,776 faces · 60 fps",nn:null,t:"yes",l:"research",u:"https://dfaust.is.tue.mpg.de/"},
+{n:"CAPE (clothed 4D scans)",c:"real",st:"C",og:"R",ho:1,co:2,mv:1,strict:1,d:"4D clothed scans · per-face deformation over time",s:"15 subj · 610 seq · 148K frames · 60 fps",nn:null,t:"yes",l:"research",u:"https://cape.is.tue.mpg.de/"},
+// -- Experimental fluid mechanics (tomo-PIV / 4D-Flow voxels = 3-cells; surface fields = 2-cells) --
+{n:"Tomo-PIV bioprosthetic aortic valve",c:"real",st:"C",og:"R",ho:1,co:3,mv:1,strict:1,d:"Fluids · per-voxel U,V,W past a valve (in-vitro rig)",s:"16 phase-locked 3D fields · +STL · ~10 GB",nn:null,t:"yes",l:"CC BY 4.0",u:"https://zenodo.org/records/1163562"},
+{n:"In-vitro 4D-Flow MRI (aneurysm phantoms)",c:"real",st:"C",og:"R",ho:1,co:3,mv:1,strict:1,d:"Fluids · per-voxel u,v,w in 3D-printed phantoms",s:"0.75 mm³ · 20 cardiac phases · 23 GB",nn:null,t:"yes",l:"CC BY 4.0",u:"https://zenodo.org/records/17183575"},
+{n:"AIVT Rayleigh–Bénard convection",c:"real",st:"C",og:"R",ho:1,co:3,mv:1,strict:1,d:"Convection · per-cell temperature + u,v,w (measured)",s:"reconstructed volume · time-resolved",nn:null,t:"yes",l:"CC BY 4.0 (Dryad)",u:"https://doi.org/10.5061/dryad.jm63xsjnj"},
+{n:"SPLEEN LP turbine cascade (VKI)",c:"real",st:"C",og:"R",ho:1,co:2,mv:1,strict:1,d:"Turbomachinery · unsteady surface pressure + wall-shear per blade/endwall cell",s:"796 MB · +CAD",nn:null,t:"yes",l:"CC BY 4.0",u:"https://zenodo.org/records/13712768"},
+{n:"Enodise distributed propulsion",c:"real",st:"C",og:"R",ho:1,co:2,mv:1,strict:1,d:"Aerodynamics · time-resolved velocity plane + wing surface pressures",s:"47 GB · +CAD",nn:null,t:"yes",l:"CC BY 4.0",u:"https://zenodo.org/records/8283630"},
+{n:"NASA uPSP launch-vehicle buffet",c:"real",st:"C",og:"R",ho:1,co:2,d:"Aerodynamics · unsteady surface pressure ΔCp per model-grid node (single scalar)",s:"~1M nodes · ~5 kHz · request-only raw",nn:null,t:"yes",l:"US Gov (code public)",u:"https://github.com/nasa/upsp-processing"}
 ];
 
 const TOOLS=[
@@ -450,7 +504,8 @@ const NOTES=[
  ["a","<strong>CollegeMsg</strong> temporal edges shown as <strong>59,835</strong>. The commonly-quoted 20,296 is the static-graph edge count, not the temporal-edge total (SNAP CollegeMsg page)."],
  ["b","<strong>SCoNe ocean-drifter</strong> counts (133 nodes / 322 edges / 186 triangles) originate in Calmon, Schaub, and Bianconi (2023) and are Euler-consistent with \\(b_1 = 4\\). The SCoNe paper (Roddenberry et al., 2021) states \\(\\dim\\ker\\Delta_1 = 1\\) for its coarser complex, while the origin paper (Schaub et al., 2020) reports \\(b_1 = 2\\). The three describe different reconstructions of the same NOAA drifter data."],
  ["c","<strong>act-mooc</strong> has no single node count on its SNAP page; it is a bipartite action log of 7,047 users + 97 targets with 411,749 actions (the widely-quoted 7,143 matches neither and was corrected)."],
- ["d","<strong>Real-world higher-order</strong> tags datasets whose records are natively hyperedges or simplices and whose data is empirical. Pairwise real-world graphs (SNAP temporal, BioGRID, connectomes) become higher-order only via clique or Rips lifting, noted in each row where applicable."]
+ ["d","<strong>Real-world higher-order</strong> tags datasets whose records are natively hyperedges or simplices and whose data is empirical. Pairwise real-world graphs (SNAP temporal, BioGRID, connectomes) become higher-order only via clique or Rips lifting, noted in each row where applicable."],
+ ["e","<strong>MV·temporal on ≥2-cells</strong> marks the strict class from the cross-field deep search: real-world data carrying a <em>multivariate</em>, <em>time-varying</em> signal on cells of order \\(\\geq 2\\) (triangles / faces, voxels, grains) or hyperedges of size \\(\\geq 3\\). Many come from fields outside topological ML (weather radar, InSAR, satellite grids, areal statistics, experimental mechanics, tomographic PIV), where the datum is natively a higher-order cochain. A <strong>2-cell</strong> / <strong>3-cell</strong> badge gives the top cell order carrying the signal; <strong>·MV</strong> marks multivariate. Reanalysis products (ERA5 on HEALPix), interpolated fields (Argo), and derived/single-scalar signals (metabolic flux, fMRI triangle co-fluctuations, uPSP) are listed for completeness but are not tagged strict, since they are model-blended, reconstructed, or univariate rather than directly measured multivariate. A few areal sets need a one-line region aggregation (taxi zones, Chicago crimes), noted inline."]
 ];
 
 // ---- structure & origin metadata
@@ -464,7 +519,7 @@ const SRCMAP=[[/cs\.cornell\.edu\/~arb/i,"Benson ARB"],[/github\.com\/xgi-org/i,
 function srcLabel(u){for(const m of SRCMAP){if(m[0].test(u))return m[1];}try{return new URL(u).hostname.replace(/^www\./,"");}catch(e){return "source";}}
 function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
 
-const state={q:"",struct:"all",origin:"all",rwho:false,temporal:false,pick:false,sortKey:null,sortDir:1};
+const state={q:"",struct:"all",origin:"all",rwho:false,temporal:false,pick:false,cochain:false,sortKey:null,sortDir:1};
 
 function visible(){
   const q=state.q.trim().toLowerCase();
@@ -474,6 +529,7 @@ function visible(){
     if(state.origin!=="all" && x.og!==state.origin) return false;
     if(state.temporal && x.t!=="yes") return false;
     if(state.pick && !x.p) return false;
+    if(state.cochain && !x.strict) return false;
     if(q && !((x.n+" "+x.d+" "+x.s+" "+(x.l||"")+" "+(x.lf||"")).toLowerCase().includes(q))) return false;
     return true;
   });
@@ -492,7 +548,7 @@ function rowHTML(x){
   const src=x.u?`<a href="${esc(x.u)}" target="_blank" rel="noopener">${esc(srcLabel(x.u))} ↗</a>`:"";
   const lift=x.lf?` <span title="Higher-order via ${esc(x.lf)}" style="color:var(--mut2);font-family:var(--mono);font-size:11px">▸${esc(x.lf)}</span>`:"";
   return `<tr>
-    <td class="nm" style="border-left-color:${tone}">${esc(x.n)}${x.p?'<span class="star" title="Top pick">★</span>':''}${x.ho?'<span class="hob" title="Real-world higher-order">RW·HO</span>':''}</td>
+    <td class="nm" style="border-left-color:${tone}">${esc(x.n)}${x.p?'<span class="star" title="Top pick">★</span>':''}${x.ho?'<span class="hob" title="Real-world higher-order">RW·HO</span>':''}${x.co?`<span class="cob" title="${x.strict?'Multivariate, temporal signal on ':'Signal on '}${x.co}-cells${x.strict?'':' (fails one strict constraint)'}">${x.co}-cell${x.mv?'·MV':''}</span>`:''}</td>
     <td><div class="catcell"><span class="stag"><span class="sw" style="background:${tone}"></span>${STLABEL[x.st]}</span><span class="otag" style="color:${OGTONE[x.og]}">${OGLABEL[x.og]}</span></div></td>
     <td class="dom">${esc(x.d)}${lift}</td>
     <td class="sz">${esc(x.s)}</td>
@@ -540,6 +596,7 @@ function toggleChip(btn,flag){const on=!state[flag];state[flag]=on;btn.setAttrib
 document.getElementById("chipRwho").addEventListener("click",e=>{toggleChip(e.currentTarget,"rwho");render();});
 document.getElementById("chipTemporal").addEventListener("click",e=>{toggleChip(e.currentTarget,"temporal");render();});
 document.getElementById("chipPick").addEventListener("click",e=>{toggleChip(e.currentTarget,"pick");render();});
+document.getElementById("chipCochain").addEventListener("click",e=>{toggleChip(e.currentTarget,"cochain");render();});
 // sort headers
 document.querySelectorAll("th.sortable").forEach(th=>th.addEventListener("click",()=>{
   const k=th.getAttribute("data-sort");
